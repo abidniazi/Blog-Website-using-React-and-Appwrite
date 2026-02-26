@@ -10,7 +10,7 @@ export class AuthService{
     this.Client
     .setEndpoint(conf.appWriteurl)
     .setProject(conf.appwriteProjectId);
-    this.account= new Account(Client);
+    this.account= new Account(this.Client);
  }
  async createAccount({email,password,name}){
     try {
@@ -57,6 +57,7 @@ async logout(){
 }
 
 }
+
 
 const authservice = new AuthService();
 export default authservice

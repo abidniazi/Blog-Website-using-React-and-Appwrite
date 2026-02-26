@@ -93,6 +93,41 @@ export class Service{
      }
    }
 
+   async uploadFile(file){
+    try {
+        return await this.bucket.createFile(
+            conf.appwriteBusketId,
+            ID.unique(),
+            file
+        )
+
+    } catch (error) {
+        console.log("uploadfile :",error);
+        return false;
+    }
+   }
+
+   async deleteFile(fileId){
+    try {
+        await this.bucket.deleteFile(
+            conf.appwriteBusketId,
+            fileId
+        )
+
+
+    } catch (error) {
+        console.log("delete file",error);
+        
+    }
+   }
+
+   gefilePreview(fileId){
+    return this.bucket.getFilePreview(
+        conf.appwriteBusketId,
+        fileId,
+    )
+   }
+
    
 
 

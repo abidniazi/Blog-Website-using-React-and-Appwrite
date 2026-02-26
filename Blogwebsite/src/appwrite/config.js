@@ -67,7 +67,35 @@ export class Service{
     }
    }
 
+   async getPost(slug){
+    try {
+        return await this.databases.getDocument(
+            conf.appwriteDatabaseId,
+            conf.appwriteCollectionId,
+            slug
+        )
+    } catch (error) {
+        console.log("get post :",error);
+        
+    }
+   }
+
+   async getPosts(Queries=[Query.equal("status","active")]){
+     try {
+        return await this.databases.listDocuments(
+            conf.appwriteDatabaseId,
+            appwriteCollectionId,
+            Queries,
+        )
+     } catch (error) {
+        console.log("get posts",error);
+        return false;
+     }
+   }
+
    
+
+
 }
 
 const service=new Service()

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import {useDispatch} from 'react-redux'
 import authservice from "./appwrite/auth.js"
 import {login,logout} from "./store/authSlice.js"
+import { Footer,Header } from './components/index.js'
+
 
 function App() {
   const [loading, setLoding] = useState(true)
@@ -24,8 +25,13 @@ authservice.getCurrentUser()
 
 
  return !loading ? (
-  <div>
+  <div className='min-h-scren flex-wrap content-between bg-gray-400'>
     Blog website
+    <div className='w-full block'>
+      <Header/>
+      {/* Outlet */}
+      <Footer/>
+    </div>
   </div>
  ) : null
 }

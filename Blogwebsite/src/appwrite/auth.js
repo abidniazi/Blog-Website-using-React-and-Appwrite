@@ -1,4 +1,3 @@
-import { use } from 'react';
 import conf from '../conf/conf'
 import { Client, Account,ID } from 'appwrite'
 
@@ -6,7 +5,7 @@ export class AuthService{
  Client = new Client();
  account;
  
- Constructor(){
+ constructor(){
     this.Client
     .setEndpoint(conf.appWriteurl)
     .setProject(conf.appwriteProjectId);
@@ -14,7 +13,7 @@ export class AuthService{
  }
  async createAccount({email,password,name}){
     try {
-const userAccount= await this.account.create(ID.unique,email,password,name)
+const userAccount= await this.account.create(ID.unique(),email,password,name)
 if(userAccount){
 // call another method
 return this.login({email,password})
@@ -39,12 +38,11 @@ return this.login({email,password})
 
  async getCurrentUser(){
     try {
-        await this.account.get();
+       return await this.account.get();
         
     } catch (error) {
         console.log("appwrite getcurrent user:",error); 
     }
-    return null;
  }
 
 async logout(){

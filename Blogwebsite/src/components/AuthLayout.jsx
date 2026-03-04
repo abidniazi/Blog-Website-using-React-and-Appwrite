@@ -17,11 +17,8 @@ function AuthLayout({ children,authentication=true }) {
 
     },[authStatus,navigate,authentication])
     
-    return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            {children}
-        </div>
-    );
+    return  loader ? <h1>loading...   </h1>:<>{children}</>;
+    
 }
 
 export default AuthLayout;

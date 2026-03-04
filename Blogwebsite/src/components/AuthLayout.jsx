@@ -1,13 +1,21 @@
 import React,{useEffect,useState} from "react";
 import {useSelector} from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 function AuthLayout({ children,authentication=true }) {
-    const naviagate = useNavigate();
+    const navigate = useNavigate();
     const [loader,setLoader] = useState(true);
-    const authStatue=useSelector(state=>state.authStatue);
-    
+    const authStatus=useSelector(state=>state.authStatue);
+    useEffect(()=>{
+    if(authentication && authStatus!==authentication){
+        navigate("/login");
+    }else if(!authentication && authStatus!==authentication){
+        navigate('/');
+    }
+    setLoader(false);
+
+    },[authStatus,navigate,authentication])
     
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
